@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>File Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: grey;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #16d48b;
+            color: #0c0c0c;
+            padding: 10px 20px;
+
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>File Converter</h1>
+        <input type="file" class="file-input">
+        <button class="btn" onclick="convertFile()">Convert</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+
+        function convertFile() {
+            const fileInput = document.querySelector('.file-input');
+            const resultDiv = document.getElementById('result');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const fileContent = e.target.result;
+                    const convertedContent = fileContent.toUpperCase();
+                    resultDiv.innerText = convertedContent;
+                };
+
+                reader.readAsText(file);
+            } else {
+                resultDiv.innerText = "choose a file to convert";
+            }
+        }
+    </script>
+</body>
+
+</html>
